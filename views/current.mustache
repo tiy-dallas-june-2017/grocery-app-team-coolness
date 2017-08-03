@@ -3,17 +3,28 @@
   <head>
     <meta charset="utf-8">
     <title>Current Inventory</title>
+    <link rel="stylesheet" href="/style.css">
   </head>
   <body>
 
+    <nav>
+      <ul>
+        <li><a href="/schedule">Employee Schedule</a></li>
+        <li><a href="/auditlog">Audit Log</a></li>
+        <li><a href="currentinventory">Inventory</a></li>
+      </ul>
+    </nav>
+
     <div class="current_section">
       <h2>Current Inventory</h2>
-      <div class="current_inventory">
+      <div class="current_data">
         {{ #inventory }}
-        <div class="item_name">{{ item }}</div>
-        <div class="edit"><a href="#">edit</a></div>
-        <div class="quantity">{{ quantity }}</div>
-        <div class="price"><p>${{ price }}</p></div>
+        <div class="item">
+          <div class="wide name">{{ item }}</div>
+          <div class="narrow edit"><a href="#">edit</a></div>
+          <div class="wide quantity">{{ quantity }}</div>
+          <div class="narrow price">${{ price }}</div>
+        </div>
         {{ /inventory }}
       </div>
       <a href=""><h3>Add New Item</h3></a>

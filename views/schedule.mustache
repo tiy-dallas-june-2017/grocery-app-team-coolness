@@ -3,17 +3,28 @@
   <head>
     <meta charset="utf-8">
     <title>Employee Schedule</title>
+    <link rel="stylesheet" href="/style.css">
   </head>
   <body>
 
+    <nav>
+      <ul>
+        <li><a href="/schedule">Employee Schedule</a></li>
+        <li><a href="/auditlog">Audit Log</a></li>
+        <li><a href="currentinventory">Inventory</a></li>
+      </ul>
+    </nav>
+
     <div class="schedule_section">
       <h2>Employee Schedule</h2>
-      <div class="employee_schedule">
+      <div class="current_data">
         {{ #employees }}
-        <div class="employee_name">{{ name }}</div>
-        <a href="/addEmployee">Edit</a>
-        <div class="time_in">{{ timeIn }}</div>
-        <div class="time_out">{{ timeOut }}</div>
+        <div class="item">
+          <div class="wide name">{{ name }}</div>
+          <div class="narrow edit"><a href="/addEmployee">Edit</a></div>
+          <div class="wide time_in">{{ timeIn }}</div>
+          <div class="wide time_out">{{ timeOut }}</div>
+        </div>
         {{ /employees }}
       </div>
       <a href="/addEmployee">Add new item</a>
