@@ -9,14 +9,12 @@
     <div class="current_section">
       <h2>Current Inventory</h2>
       <div class="current_inventory">
-        {{#put stuff here}}
-        <div class="item_name"></div>
-        <div class="edit"></div>
-        <div class="quantity"></div>
-        <div class="price"><p>${{}}
-          </p>
-        </div>
-        {{/put stuff here}}
+        {{ #inventory }}
+        <div class="item_name">{{ item }}</div>
+        <div class="edit"><a href="#">edit</a></div>
+        <div class="quantity">{{ quantity }}</div>
+        <div class="price"><p>${{ price }}</p></div>
+        {{ /inventory }}
       </div>
       <a href=""><h3>Add New Item</h3></a>
     </div>
