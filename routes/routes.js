@@ -45,7 +45,7 @@ router.get('/currentinventory', (req, res) => {
 });
 
 router.get('/schedule', (req, res) => {
-  employee.getAll({}, (err, results) => {
+  employee.getAll( (err, results) => {
     if (err) {
       console.log(err);
       throw err;
