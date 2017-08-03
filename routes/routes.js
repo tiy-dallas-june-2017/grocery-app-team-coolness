@@ -34,6 +34,4 @@ router.get('/currentinventory', (req, res) => {
   res.render('current', data);
 });
 
-
-
 module.exports = router;
