@@ -1,5 +1,3 @@
-const mongo = require('mongodb');
-
-
+const mongo = require('../mongo');
 
 module.exports = mongo;
