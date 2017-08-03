@@ -11,9 +11,9 @@
 
       <div class="items_form">
         <form action="/add_item" method="POST">
-          <input type="text" name="item"/>
-          <input type="number" name="quantity"/>
-          <input type="number" name="price"/>
+          <input type="text" name="item" value="{{ item.item }}"/>
+          <input type="number" name="quantity" value="{{ item.quantity }}" />
+          <input type="number" name="price" value="{{ item.price }}" />
           <a href=""><h3>cancel</h3></a>
           <button id="submit" type="submit">Save</button>
         </form>
