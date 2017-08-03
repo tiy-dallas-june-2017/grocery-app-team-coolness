@@ -1,12 +1,9 @@
 const router = require('express').Router();
 const inventory = require('../model/inventory');
+const employee = require('../model/employee');
 
 router.get('/', (req, res) => {
   res.render('index');
-});
-
-router.get('/employees', (req, res) => {
-  res.render('schedule');
 });
 
 router.get('/auditlog', (req, res) => {
@@ -35,24 +32,6 @@ router.get('/auditlog', (req, res) => {
 });
 
 router.get('/currentinventory', (req, res) => {
-  // let inventory = [
-  //   {
-  //     item: 'steak',
-  //     quantity: 45,
-  //     price: 8.99
-  //   },
-  //   {
-  //     item: 'banana',
-  //     quantity: 20,
-  //     price: 0.39
-  //   },
-  //   {
-  //     item: 'beer',
-  //     quantity: 37,
-  //     price: 10.99
-  //   }
-  // ];
-  // let data = { inventory }
   inventory.getAll((err, results) => {
     if (err) {
       console.log(err);
@@ -66,29 +45,23 @@ router.get('/currentinventory', (req, res) => {
 });
 
 router.get('/schedule', (req, res) => {
-  let employees = [
-    {
-      name: 'Bob Smith',
-      timeIn: new Date().toDateString(),
-      timeOut: new Date().toDateString()
-    },
-    {
-      name: 'Joe Collins',
-      timeIn: new Date().toDateString(),
-      timeOut: new Date().toDateString()
-    },
-    {
-      name: 'Diane James',
-      timeIn: new Date().toDateString(),
-      timeOut: new Date().toDateString()
+  employee.getAll({}, (err, results) => {
+    if (err) {
+      console.log(err);
+      throw err;
+    } else {
+      let data = { employees: results };
+      res.render('schedule', data);
     }
-  ];
-  let data = { employees };
-  res.render('schedule', data);
+  });
 });
 
 router.get('/add_item', (req, res) => {
   res.render('add_items');
+});
+
+router.get('/addEmployee', (req, res) => {
+  res.render('addEmployee');
 });
 
 router.post('/add_item', (req, res) => {
@@ -104,6 +77,21 @@ router.post('/add_item', (req, res) => {
       res.redirect('/currentinventory');
     }
   })
-})
+});
+
+router.post('/addEmployee', (req, res) => {
+  let name = req.body.name;
+  let timeIn = req.body.time_in;
+  let timeOut = req.body.time_out;
+  let newEmployee = { name, timeIn, timeOut };
+  employee.insert(newEmployee, (err, result) => {
+    if (err) {
+      console.log(err, results);
+      throw err;
+    } else {
+      res.redirect('/schedule');
+    }
+  })
+});
 
 module.exports = router;
