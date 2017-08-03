@@ -33,6 +33,19 @@ router.get('/currentinventory', (req, res) => {
   })
 });
 
+router.get('/editEmployee/:id', (req, res) => {
+  let id = req.params.id;
+  employee.findOne({ _id: mongo.ObjectID(id) }, (err, results) => {
+    if (err) {
+      console.log(err);
+      throw err;
+    } else {
+      console.log(results);
+      res.render('addEmployee', results);
+    };
+  });
+});
+
 router.get('/schedule', (req, res) => {
   employee.getAll((err, results) => {
     if (err) {

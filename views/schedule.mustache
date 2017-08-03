@@ -21,7 +21,7 @@
         {{ #employees }}
         <div class="item">
           <div class="wide name">{{ name }}</div>
-          <div class="narrow edit"><a href="/addEmployee">Edit</a></div>
+          <div class="narrow edit"><a href="/editEmployee/{{ _id }}">Edit</a></div>
           <div class="wide time_in">{{ timeIn }}</div>
           <div class="wide time_out">{{ timeOut }}</div>
         </div>

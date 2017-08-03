@@ -14,4 +14,11 @@ function insert(employee, callback) {
   });
 };
 
-module.exports = { getAll, insert };
+function findOne(itemId, callback) {
+  let db = mongo.db();
+  db.collection('employees').findOne(itemId, (err, results) => {
+    callback(err, results);
+  });
+};
+
+module.exports = { getAll, insert, findOne };
