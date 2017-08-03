@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  font-family: sans-serif;
 }
 
 .container {
@@ -36,7 +37,7 @@ body {
 
 nav {
   background: black;
-  color: white;
+  padding-right: 80px;
 }
 
 nav ul {
@@ -48,12 +49,14 @@ nav ul {
 
 nav ul li {
   list-style: none;
-  padding: 20px 40px;
+  padding: 20px 30px;
 }
 
 nav ul li a {
   text-decoration: none;
   color: white;
+  text-transform: uppercase;
+  letter-spacing: 4px;
 }
 
 nav ul li a:hover {
