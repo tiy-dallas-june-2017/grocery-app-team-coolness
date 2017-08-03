@@ -15,14 +15,14 @@
       </ul>
     </nav>
 
-  <div class="audit_section">
+  <div class="container">
     <h2>Inventory Audit Log</h2>
     <div class="current_data">
       {{ #auditlog }}
       <div class="item">
         <div class="wide name">{{ item }}</div>
         <div class="narrow quantity">{{ quantity }}</div>
-        <div class="narrow price">{{ price }}</div>
+        <div class="narrow price">${{ price }}</div>
         <div class="wide timestamp">{{ date }}</div>
       </div>
       {{ /auditlog }}
