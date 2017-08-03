@@ -40,6 +40,12 @@ nav {
   padding-right: 80px;
 }
 
+#logo {
+  float: left;
+  width: 75px;
+  margin: 20px 0 0 40px;
+}
+
 nav ul {
   padding-left: 0;
   display: flex;
@@ -65,4 +71,20 @@ nav ul li a:hover {
 
 h2 {
   text-align: center;
+}
+
+#titleContainer {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#title1 {
+ margin-top: 100px;
+ float: left;
+}
+
+#title2 {
+  margin-top: 120px;
+  margin-left: 50px;
+  float: left;
 }
