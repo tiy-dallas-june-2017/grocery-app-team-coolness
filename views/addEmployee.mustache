@@ -5,17 +5,18 @@
     <title>Add Employee</title>
   </head>
   <body>
-    <form method="post" action="" >
+    <!-- <form method="post" action="" >
         <input type="text" name="name" placeholder="Name" />
         <input type="text " name="time_in"  placeholder="Start Time"/>
         <input type="text" name="time_out" placeholder="End Time" />
     <button type="submit" name="button">Save</button>
-  </form>
+  </form> -->
 
-  <form method="post" action="">
+  <form action="/addEmployee" method="POST">
     <input type="text" name="name" placeholder="Name" />
     <input type="text" name="time_in" placeholder="Start Time" />
-    <input type="text" name="time_out" placeholder="End Time"
+    <input type="text" name="time_out" placeholder="End Time" />
+    <input type="submit" value="Submit" />
   </form>
 
   </body>
