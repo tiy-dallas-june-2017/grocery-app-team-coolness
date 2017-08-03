@@ -44,6 +44,11 @@ nav {
   float: left;
   width: 75px;
   margin: 20px 0 0 40px;
+  transition: 200ms;
+}
+
+#logo:hover {
+  transform: scale(1.1);
 }
 
 nav ul {
@@ -67,6 +72,7 @@ nav ul li a {
 
 nav ul li a:hover {
   color: lightgreen;
+  cursor: pointer;
 }
 
 h2 {
@@ -75,19 +81,9 @@ h2 {
 
 
 #titleContainer {
-  margin: 0 auto;
+  margin: 180px auto 0;
   text-align: center;
 }
-
-#title1 {
- margin-top: 100px;
- float: left;
-}
-
-#title2 {
-  margin-top: 120px;
-  margin-left: 50px;
-  float: left;
 
 button{
   background-color: black;
