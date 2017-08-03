@@ -28,4 +28,4 @@ mongo.connect(url, (err, db) => {
       console.log(`Your app is running on PORT ${ port }.`);
     });
   }
-})
+});
