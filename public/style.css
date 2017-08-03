@@ -1,0 +1,27 @@
+.current_data {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid black;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.item {
+  flex-basis: 100%;
+  display: flex;
+}
+
+.item div {
+  border: 1px solid black;
+  padding: 10px;
+  box-sizing: border-box;
+  flex-grow: 1;
+}
+
+.wide {
+  flex-basis: 20%;
+}
+
+.narrow {
+  flex-basis: 10%;
+}

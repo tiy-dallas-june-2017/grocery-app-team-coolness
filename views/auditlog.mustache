@@ -3,18 +3,28 @@
   <head>
     <meta charset="utf-8">
     <title>Audit Inventory</title>
+    <link rel="stylesheet" href="/style.css">
   </head>
   <body>
 
+    <nav>
+      <ul>
+        <li><a href="/schedule">Employee Schedule</a></li>
+        <li><a href="/auditlog">Audit Log</a></li>
+        <li><a href="currentinventory">Inventory</a></li>
+      </ul>
+    </nav>
 
   <div class="audit_section">
     <h2>Inventory Audit Log</h2>
-    <div class="audit_inventory">
+    <div class="current_data">
       {{ #auditlog }}
-      <div class="item_name">{{ name }}</div>
-      <div class="quantity">{{ quantity }}</div>
-      <div class="price">{{ price }}</div>
-      <div class="timestamp">{{ date }}</div>
+      <div class="item">
+        <div class="wide name">{{ item }}</div>
+        <div class="narrow quantity">{{ quantity }}</div>
+        <div class="narrow price">{{ price }}</div>
+        <div class="wide timestamp">{{ date }}</div>
+      </div>
       {{ /auditlog }}
     </div>
   </div>
