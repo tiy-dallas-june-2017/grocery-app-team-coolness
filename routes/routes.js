@@ -77,4 +77,5 @@ router.get('/schedule', (req, res) => {
   res.render('schedule', data);
 })
 
+
 module.exports = router;
