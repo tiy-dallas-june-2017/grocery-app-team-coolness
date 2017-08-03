@@ -35,25 +35,34 @@ router.get('/auditlog', (req, res) => {
 });
 
 router.get('/currentinventory', (req, res) => {
-  let inventory = [
-    {
-      item: 'steak',
-      quantity: 45,
-      price: 8.99
-    },
-    {
-      item: 'banana',
-      quantity: 20,
-      price: 0.39
-    },
-    {
-      item: 'beer',
-      quantity: 37,
-      price: 10.99
+  // let inventory = [
+  //   {
+  //     item: 'steak',
+  //     quantity: 45,
+  //     price: 8.99
+  //   },
+  //   {
+  //     item: 'banana',
+  //     quantity: 20,
+  //     price: 0.39
+  //   },
+  //   {
+  //     item: 'beer',
+  //     quantity: 37,
+  //     price: 10.99
+  //   }
+  // ];
+  // let data = { inventory }
+  inventory.getAll((err, results) => {
+    if (err) {
+      console.log(err);
+      throw err;
+    } else {
+      console.log(results);
+      let data = { inventory: results }
+      res.render('current', data);
     }
-  ];
-  let data = { inventory }
-  res.render('current', data);
+  })
 });
 
 router.get('/schedule', (req, res) => {
@@ -77,5 +86,24 @@ router.get('/schedule', (req, res) => {
   let data = { employees };
   res.render('schedule', data);
 });
+
+router.get('/add_item', (req, res) => {
+  res.render('add_items');
+});
+
+router.post('/add_item', (req, res) => {
+  let item = req.body.item;
+  let quantity = req.body.quantity;
+  let price = req.body.price;
+  let newItem = { item, quantity, price };
+  inventory.insert(newItem, (err, result) => {
+    if (err) {
+      console.log(err);
+      throw err;
+    } else {
+      res.redirect('/currentinventory');
+    }
+  })
+})
 
 module.exports = router;
