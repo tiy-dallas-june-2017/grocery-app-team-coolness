@@ -8,16 +8,15 @@ router.get('/', (req, res) => {
 });
 
 router.get('/auditlog', (req, res) => {
-  inventory.getAll(function(err, results){
-    if(err) {
+  inventory.getAll((err, results) => {
+    if (err) {
       console.log(err);
       throw err;
     } else {
-      let data = {inventory: results};
+      let data = { inventory: results };
       res.render('auditlog', data);
     }
   })
-
 });
 
 router.get('/currentinventory', (req, res) => {
