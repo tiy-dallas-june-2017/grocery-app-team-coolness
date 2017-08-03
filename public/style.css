@@ -73,6 +73,7 @@ h2 {
   text-align: center;
 }
 
+
 #titleContainer {
   margin: 0 auto;
   text-align: center;
@@ -87,4 +88,25 @@ h2 {
   margin-top: 120px;
   margin-left: 50px;
   float: left;
+
+button{
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+  box-shadow: 2px 2px grey;
+  font-size: 1em;
+  font-weight: bold;
+  font-style: oblique;
+
+}
+input{
+  background-color: white;
+  color: black;
+  box-shadow: 2px 2px  grey;
+  font-size: 1em;
+  text-align: center;
+  font-weight: bold;
+  font-family:sans-serif, serif;
+  width: 30px;
+
 }

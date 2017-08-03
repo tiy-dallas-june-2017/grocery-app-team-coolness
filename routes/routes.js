@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const inventory = require('../model/inventory');
 const employee = require('../model/employee');
+const mongo = require('../mongo');
 
 router.get('/', (req, res) => {
 
@@ -32,6 +33,19 @@ router.get('/currentinventory', (req, res) => {
   })
 });
 
+router.get('/editEmployee/:id', (req, res) => {
+  let id = req.params.id;
+  employee.findOne({ _id: mongo.ObjectID(id) }, (err, results) => {
+    if (err) {
+      console.log(err);
+      throw err;
+    } else {
+      console.log(results);
+      res.render('addEmployee', results);
+    };
+  });
+});
+
 router.get('/schedule', (req, res) => {
   employee.getAll((err, results) => {
     if (err) {
@@ -52,6 +66,20 @@ router.get('/add_item', (req, res) => {
 router.get('/addEmployee', (req, res) => {
   res.render('addEmployee');
 });
+
+router.get('/edit_item/:id', (req, res) => {
+  let id = req.params.id;
+  inventory.findOne({ _id: mongo.ObjectID(id) }, (err, results) => {
+    if (err) {
+      console.log(err);
+      throw err;
+    } else {
+      let data = { item: results };
+      console.log(data);
+      res.render('add_items', data);
+    }
+  })
+})
 
 router.post('/add_item', (req, res) => {
   let item = req.body.item;
@@ -82,5 +110,6 @@ router.post('/addEmployee', (req, res) => {
     }
   })
 });
+
 
 module.exports = router;
