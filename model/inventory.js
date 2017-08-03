@@ -13,7 +13,14 @@ function insert(item, callback) {
   db.collection('inventory').insert(item, (err, results) => {
     console.log(err, results);
     callback(err, results);
-  })
-}
+  });
+};
 
-module.exports = {getAll, insert};
+function findOne(itemId, callback) {
+  let db = mongo.db();
+  db.collection('inventory').findOne(itemId, (err, results) => {
+    callback(err, results);
+  });
+};
+
+module.exports = {getAll, insert, findOne};
