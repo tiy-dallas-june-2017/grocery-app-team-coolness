@@ -1,7 +1,6 @@
 {
   "name": "teamgroceryproject",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,5 +13,14 @@
     "express": "^4.15.3",
     "mongodb": "^2.2.30",
     "mustache-express": "^1.2.5"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tiy-dallas-june-2017/grocery-app-team-coolness.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tiy-dallas-june-2017/grocery-app-team-coolness/issues"
+  },
+  "homepage": "https://github.com/tiy-dallas-june-2017/grocery-app-team-coolness#readme",
+  "description": ""
 }

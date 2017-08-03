@@ -4,6 +4,7 @@ const employee = require('../model/employee');
 const mongo = require('../mongo');
 
 router.get('/', (req, res) => {
+
   res.render('index');
 });
 
@@ -96,5 +97,6 @@ router.post('/addEmployee', (req, res) => {
     }
   })
 });
+
 
 module.exports = router;
