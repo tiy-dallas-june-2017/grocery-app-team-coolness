@@ -9,7 +9,28 @@ router.get('/employees', (req, res) => {
 });
 
 router.get('/auditlog', (req, res) => {
-  res.render('auditlog');
+  let auditlog = [
+    {
+      item: 'steak',
+      quantity: 45,
+      price: 8.99,
+      date: new Date().toDateString()
+    },
+    {
+      item: 'banana',
+      quantity: 20,
+      price: 0.39,
+      date: new Date().toDateString()
+    },
+    {
+      item: 'beer',
+      quantity: 37,
+      price: 10.99,
+      date: new Date().toDateString()
+    }
+  ];
+  let data = { auditlog }
+  res.render('auditlog', data);
 });
 
 router.get('/currentinventory', (req, res) => {
