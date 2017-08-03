@@ -3,6 +3,7 @@ const inventory = require('../model/inventory');
 const employee = require('../model/employee');
 
 router.get('/', (req, res) => {
+
   res.render('index');
 });
 
