@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const inventory = require('../model/inventory');
 
 router.get('/', (req, res) => {
   res.render('index');
@@ -75,6 +76,6 @@ router.get('/schedule', (req, res) => {
   ];
   let data = { employees };
   res.render('schedule', data);
-})
+});
 
 module.exports = router;
