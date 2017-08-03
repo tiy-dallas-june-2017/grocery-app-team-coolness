@@ -16,6 +16,7 @@ app.engine('mustache', mustacheInstance);
 app.set('view engine', 'mustache');
 app.set('views', __dirname + '/views');
 
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
 app.use('/', router);
 
