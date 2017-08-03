@@ -53,6 +53,28 @@ router.get('/currentinventory', (req, res) => {
   ];
   let data = { inventory }
   res.render('current', data);
+});
+
+router.get('/schedule', (req, res) => {
+  let employees = [
+    {
+      name: 'Bob Smith',
+      timeIn: new Date().toDateString(),
+      timeOut: new Date().toDateString()
+    },
+    {
+      name: 'Joe Collins',
+      timeIn: new Date().toDateString(),
+      timeOut: new Date().toDateString()
+    },
+    {
+      name: 'Diane James',
+      timeIn: new Date().toDateString(),
+      timeOut: new Date().toDateString()
+    }
+  ];
+  let data = { employees };
+  res.render('schedule', data);
 })
 
 module.exports = router;
