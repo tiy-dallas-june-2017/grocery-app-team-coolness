@@ -40,6 +40,17 @@ nav {
   padding-right: 80px;
 }
 
+#logo {
+  float: left;
+  width: 75px;
+  margin: 20px 0 0 40px;
+  transition: 200ms;
+}
+
+#logo:hover {
+  transform: scale(1.1);
+}
+
 nav ul {
   padding-left: 0;
   display: flex;
@@ -61,11 +72,19 @@ nav ul li a {
 
 nav ul li a:hover {
   color: lightgreen;
+  cursor: pointer;
 }
 
 h2 {
   text-align: center;
 }
+
+
+#titleContainer {
+  margin: 180px auto 0;
+  text-align: center;
+}
+
 button{
   background-color: black;
   color: white;
@@ -85,4 +104,5 @@ input{
   font-weight: bold;
   font-family:sans-serif, serif;
   width: 30px;
+
 }
