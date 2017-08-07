@@ -118,6 +118,14 @@ router.post('/edit_item/:id', (req, res) => {
   let quantity = req.body.quantity;
   let price = req.body.price;
   let editedItem = { item, quantity, price };
+  req.checkBody('item', 'Item entry may only include letters').notEmpty().isAlpha();
+  req.getValidationResult()
+  .then(function(result) {
+    if (!result)
+  })
+
+
+
   inventory.update(id, editedItem, (err, result) => {
     if (err) {
       console.log('error====================', err);
