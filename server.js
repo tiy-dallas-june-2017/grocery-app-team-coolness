@@ -2,7 +2,8 @@ const express = require('express'),
       app = express(),
       bodyParser = require('body-parser'),
       mongo = require('./mongo'),
-      mustacheExpress = require('mustache-express');
+      mustacheExpress = require('mustache-express')
+      expressValidator = require('express-validator');
 
 const router = require('./routes/routes');
 
@@ -17,6 +18,7 @@ app.set('view engine', 'mustache');
 app.set('views', __dirname + '/views');
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressValidator());
 app.use(express.static('public'));
 app.use('/', router);
 

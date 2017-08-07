@@ -2,6 +2,7 @@ const router = require('express').Router();
 const inventory = require('../model/inventory');
 const employee = require('../model/employee');
 const mongo = require('../mongo');
+const expressValidator = require('express-validator');
 
 router.get('/', (req, res) => {
 
@@ -86,14 +87,23 @@ router.post('/add_item', (req, res) => {
   let quantity = req.body.quantity;
   let price = req.body.price;
   let newItem = { item, quantity, price };
-  inventory.insert(newItem, (err, result) => {
-    if (err) {
-      console.log(err);
-      throw err;
+  req.check('item', 'Item entry may only include letters.').isAlpha().isEmpty();
+  req.getValidationResult()
+  .then(function(result) {
+    if (!result.isEmpty()) {
+      console.log(result);
     } else {
-      res.redirect('/currentinventory');
+      console.log(result);
+      inventory.insert(newItem, (err, result) => {
+        if (err) {
+          console.log(err);
+          throw err;
+        } else {
+          res.redirect('/currentinventory');
+        }
+      })
     }
-  })
+  });
 });
 
 router.post('/addEmployee', (req, res) => {
