@@ -17,7 +17,7 @@
     </nav>
 
     <div class="add_items">
-      <h2>Add Item</h2>
+      <h2>Edit Item</h2>
 
       <div class="items_form">
         <form action="/edit_item/{{ item._id }}" method="POST">
@@ -40,11 +40,11 @@
 
       </div>
 
-    {{ #errorMessage }}
-      <h2>
-        {{ errorMessage }}
-      </h2>
-    {{ /errorMessage }}
+
+      {{ #errorMessage }}
+      <h2>{{ errorMessage }}</h2>
+      {{ /errorMessage }}
+
 
     </div>
 
