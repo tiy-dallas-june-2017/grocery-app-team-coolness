@@ -21,11 +21,22 @@
 
       <div class="items_form">
         <form action="/add_item" method="POST">
-          <input type="text" name="item" value=""/>
-          <input type="number" name="quantity" value="" />
-          <input type="number" name="price" value="" />
-          <a href=""><h3>cancel</h3></a>
-          <button id="submit" type="submit">Save</button>
+          <div class="form-group">
+            <label>Item: </label>
+            <input type="text" name="item" value=""/>
+          </div>
+          <div class="form-group half">
+            <label>Quantity: </label>
+            <input type="number" name="quantity" value="" />
+          </div>
+          <div class="form-group half">
+            <label>Price: </label>
+            <input type="number" name="price" value="" />
+          </div>
+          <div class="form-group">
+            <a href=""><h3>cancel</h3></a>
+            <button id="submit" type="submit">Save</button>
+          </div>
         </form>
 
 
