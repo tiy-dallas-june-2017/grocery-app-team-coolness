@@ -90,12 +90,13 @@ router.post('/add_item', (req, res) => {
   let price = req.body.price;
   let newItem = { item, quantity, price };
   req.checkBody('item', 'Item entry may only include letters.').notEmpty().isAlpha();
+  req.checkBody('quantity', 'Quantity must be a number.').notEmpty().isInt();
+  req.checkBody('price', 'Price must be a number.').notEmpty().isNumeric();
   req.getValidationResult()
   .then(function(result) {
     if (!result.isEmpty()) {
       console.log('result=======================', result.array()[0].msg, '===================');
       req.session.errorMessage = result.array()[0].msg;
-      console.log('before redirect', req.session);
       res.render('add_items', { errorMessage: req.session.errorMessage });
     } else {
       req.session.errorMessage = '';
@@ -119,22 +120,24 @@ router.post('/edit_item/:id', (req, res) => {
   let price = req.body.price;
   let editedItem = { item, quantity, price };
   req.checkBody('item', 'Item entry may only include letters').notEmpty().isAlpha();
+  req.checkBody('quantity', 'Quantity must be a number.').notEmpty().isInt();
+  req.checkBody('price', 'Price must be a number.').notEmpty().isNumeric();
   req.getValidationResult()
   .then(function(result) {
-    if (!result)
-  })
-
-
-
-  inventory.update(id, editedItem, (err, result) => {
-    if (err) {
-      console.log('error====================', err);
-      throw err;
+    if (!result.isEmpty()) {
+      let errorMessage = result.array()[0].msg;
+      let data = { item: editedItem, errorMessage, id };
+      res.render('edit_item', data);
     } else {
-      console.log('edited item========================', result, 'end of result============================');
-      res.redirect('/currentinventory');
+      inventory.update(id, editedItem, (err, result) => {
+        if (err) {
+          throw err;
+        } else {
+          res.redirect('/currentinventory');
+        }
+      });
     }
-  });
+  })
 });
 
 router.post('/addEmployee', (req, res) => {
@@ -152,5 +155,19 @@ router.post('/addEmployee', (req, res) => {
   })
 });
 
+router.post('/editEmployee', (req, res) => {
+  let name = req.body.name;
+  let timeIn = req.body.time_in;
+  let timeOut = req.body.time_out;
+  let editedEmployee = { name, timeIn, timeOut };
+  employee.insert(newEmployee, (err, result) => {
+    if (err) {
+      console.log(err, results);
+      throw err;
+    } else {
+      res.redirect('/schedule');
+    }
+  })
+});
 
 module.exports = router;

@@ -1,4 +1,5 @@
 const mongo = require('../mongo');
+const ObjectID = require('mongodb').ObjectID;
 
 function getAll(callback) {
   let db = mongo.db();
@@ -25,7 +26,7 @@ function findOne(itemId, callback) {
 
 function update(itemId, newItem, callback) {
   let db = mongo.db();
-  db.collection('inventory').update({'_id': itemId}, {$set: newItem}, (err, results) => {
+  db.collection('inventory').update({'_id': ObjectID(itemId)}, {$set: newItem}, (err, results) => {
     callback(err, results);
   });
 };
