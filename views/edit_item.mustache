@@ -12,7 +12,7 @@
       <ul>
         <li><a href="/schedule">Employee Schedule</a></li>
         <li><a href="/auditlog">Audit Log</a></li>
-        <li><a href="currentinventory">Inventory</a></li>
+        <li><a href="/currentinventory">Inventory</a></li>
       </ul>
     </nav>
 
@@ -33,9 +33,18 @@
           <a href=""><h3>cancel</h3></a>
           <button id="submit" type="submit">Save</button>
         </form>
+        <form action="/remove_item/{{ item._id }}" method="POST" id="remove_form">
+          <input id="remove" type="submit" value="delete"/>
+        </form>
 
 
       </div>
+
+    {{ #errorMessage }}
+      <h2>
+        {{ errorMessage }}
+      </h2>
+    {{ /errorMessage }}
 
     </div>
 

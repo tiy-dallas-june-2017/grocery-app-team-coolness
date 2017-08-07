@@ -121,21 +121,43 @@ router.post('/edit_item/:id', (req, res) => {
   req.checkBody('item', 'Item entry may only include letters').notEmpty().isAlpha();
   req.getValidationResult()
   .then(function(result) {
-    if (!result)
-  })
+    if (!result.isEmpty()) {
+      let errorMessage = result.array()[0].msg;
+      let data = { item: editedItem, errorMessage };
+      res.render('edit_item', data);
+    } else {
+      inventory.update(id, editedItem, (err, result) => {
+        if (err) {
+          console.log('error=====================', err);
+          throw err;
+        } else {
+          console.log('edited item ====================', result, 'end of result==================');
+          res.redirect('/currentinventory');
+          }
+        });
+      }
+  });
+});
 
-
-
-  inventory.update(id, editedItem, (err, result) => {
+router.post('/remove_item/:id', (req, res) => {
+  let id = req.params.id;
+  let item = req.body.item;
+  let quantity = req.body.quantity;
+  let price = req.body.price;
+  let removedItem = { item, quantity, price };
+  inventory.remove(id, (err, result) => {
     if (err) {
       console.log('error====================', err);
-      throw err;
+      // throw err;
+      res.redirect('/');
     } else {
-      console.log('edited item========================', result, 'end of result============================');
+      console.log('edited item ========================', result, 'end of result=====================');
       res.redirect('/currentinventory');
     }
   });
 });
+
+
 
 router.post('/addEmployee', (req, res) => {
   let name = req.body.name;
