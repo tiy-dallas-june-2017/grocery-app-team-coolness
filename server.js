@@ -1,8 +1,10 @@
 const express = require('express'),
       app = express(),
       bodyParser = require('body-parser'),
+      expressValidator = require('express-validator'),
       mongo = require('./mongo'),
-      mustacheExpress = require('mustache-express');
+      mustacheExpress = require('mustache-express')
+      session = require('express-session');
 
 const router = require('./routes/routes');
 
@@ -17,6 +19,13 @@ app.set('view engine', 'mustache');
 app.set('views', __dirname + '/views');
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressValidator());
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}));
 app.use(express.static('public'));
 app.use('/', router);
 
