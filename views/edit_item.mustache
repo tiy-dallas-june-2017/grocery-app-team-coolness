@@ -20,18 +20,16 @@
       <h2>Add Item</h2>
 
       <div class="items_form">
-        <form action="/add_item" method="POST">
-          <input type="text" name="item" value=""/>
-          <input type="number" name="quantity" value="" />
-          <input type="number" name="price" value="" />
+        <form action="/edit_item/{{ item._id }}" method="POST">
+          <input type="text" name="item" value="{{ item.item }}"/>
+          <input type="number" name="quantity" value="{{ item.quantity }}" />
+          <input type="number" name="price" value="{{ item.price }}" />
           <a href=""><h3>cancel</h3></a>
           <button id="submit" type="submit">Save</button>
         </form>
 
 
       </div>
-
-      <h2>{{ errorMessage }}</h2>
 
     </div>
 

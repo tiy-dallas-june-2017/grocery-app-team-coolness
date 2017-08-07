@@ -3,6 +3,7 @@ const inventory = require('../model/inventory');
 const employee = require('../model/employee');
 const mongo = require('../mongo');
 const expressValidator = require('express-validator');
+const session = require('express-session');
 
 router.get('/', (req, res) => {
 
@@ -61,7 +62,8 @@ router.get('/schedule', (req, res) => {
 });
 
 router.get('/add_item', (req, res) => {
-  res.render('add_items');
+  console.log(req.session);
+  res.render('add_items', { errorMessage: req.session.errorMessage });
 });
 
 router.get('/addEmployee', (req, res) => {
@@ -77,7 +79,7 @@ router.get('/edit_item/:id', (req, res) => {
     } else {
       let data = { item: results };
       console.log(data);
-      res.render('add_items', data);
+      res.render('edit_item', data);
     }
   })
 })
@@ -87,12 +89,16 @@ router.post('/add_item', (req, res) => {
   let quantity = req.body.quantity;
   let price = req.body.price;
   let newItem = { item, quantity, price };
-  req.check('item', 'Item entry may only include letters.').isAlpha().isEmpty();
+  req.checkBody('item', 'Item entry may only include letters.').notEmpty().isAlpha();
   req.getValidationResult()
   .then(function(result) {
     if (!result.isEmpty()) {
-      console.log(result);
+      console.log('result=======================', result.array()[0].msg, '===================');
+      req.session.errorMessage = result.array()[0].msg;
+      console.log('before redirect', req.session);
+      res.render('add_items', { errorMessage: req.session.errorMessage });
     } else {
+      req.session.errorMessage = '';
       console.log(result);
       inventory.insert(newItem, (err, result) => {
         if (err) {
@@ -102,6 +108,23 @@ router.post('/add_item', (req, res) => {
           res.redirect('/currentinventory');
         }
       })
+    }
+  });
+});
+
+router.post('/edit_item/:id', (req, res) => {
+  let id = req.params.id;
+  let item = req.body.item;
+  let quantity = req.body.quantity;
+  let price = req.body.price;
+  let editedItem = { item, quantity, price };
+  inventory.update(id, editedItem, (err, result) => {
+    if (err) {
+      console.log('error====================', err);
+      throw err;
+    } else {
+      console.log('edited item========================', result, 'end of result============================');
+      res.redirect('/currentinventory');
     }
   });
 });
