@@ -1,4 +1,5 @@
 const mongo = require('../mongo');
+const ObjectID = require('mongodb').ObjectID;
 
 function getAll(callback) {
   let db = mongo.db();
@@ -21,4 +22,11 @@ function findOne(itemId, callback) {
   });
 };
 
-module.exports = { getAll, insert, findOne };
+function update(itemId, editedItem, callback) {
+  let db = mongod.db();
+  db.collection('employees').update({ "_id": ObjectID(itemId) }, { $set: editedEmployee }, (err, result) => {
+    callback(err, result);
+  });
+};
+
+module.exports = { getAll, insert, findOne, update };
