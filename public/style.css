@@ -4,7 +4,7 @@ body {
 }
 
 .container {
-  width: 60%;
+  width: 80%;
   margin: 0 auto;
 }
 
@@ -87,14 +87,14 @@ h2 {
 }
 
 button{
-  background-color: black;
+  background-color: #9a9898;
   color: white;
   border: 1px solid white;
-  box-shadow: 2px 2px grey;
   font-size: 1em;
   font-weight: bold;
   font-style: oblique;
-
+  width: 8%;
+  height: 40px;
 }
 
 form {
@@ -117,6 +117,25 @@ form {
 }
 
 input{
+    width: 30%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid grey;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+form{
+  display: grid;
+}
+
+
+
+
+
+
+/*input{
   background-color: white;
   color: black;
   box-shadow: 2px 2px  grey;
