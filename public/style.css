@@ -128,3 +128,15 @@ input{
     font-family:sans-serif, serif;
     width: 100%;
 }
+
+.errors {
+  background-color: rgba(255, 0, 0, 0.2);
+  border: 1px solid red;
+  color: red;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.errors h2 {
+  font-size: 16px;
+}

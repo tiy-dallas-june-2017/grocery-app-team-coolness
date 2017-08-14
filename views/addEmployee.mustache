@@ -18,8 +18,8 @@
 
   <form action="/addEmployee" method="POST">
     <input type="text" name="name" placeholder="Name" value="{{ name }}" />
-    <input type="text" name="time_in" placeholder="Start Time" value="{{ timeIn }}" />
-    <input type="text" name="time_out" placeholder="End Time" value={{ timeOut }} />
+    <input type="time" name="time_in" placeholder="Start Time" value="{{ timeIn }}" />
+    <input type="time" name="time_out" placeholder="End Time" value={{ timeOut }} />
     <input type="submit" value="Submit" />
     <a href="/schedule"><h3>Cancel</h3></a>
   </form>
