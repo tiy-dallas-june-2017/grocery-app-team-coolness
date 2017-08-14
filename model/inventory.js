@@ -8,6 +8,7 @@ function getAll(callback) {
   });
 };
 
+
 function insert(item, callback) {
   let db = mongo.db();
   item.dateCreated = new Date().toDateString();

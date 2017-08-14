@@ -28,6 +28,22 @@
         </div>
         {{ /inventory }}
       </div>
+
+      <h2>Missing Inventory</h2>
+
+      <div>        
+        {{ #inventory }}
+        {{ #isMissing }}
+        <div class="item">
+          <div class="wide name">{{ item }}</div>
+          <div class="narrow edit"><a href="/edit_item/{{ _id }}">edit</a></div>
+          <div class="wide quantity">{{ quantity }}</div>
+          <div class="narrow price">{{ price }}</div>
+        </div>
+        {{ /isMissing }}
+        {{ /inventory }}
+
+      </div>
       <a href="/add_item"><h3>Add New Item</h3></a>
     </div>
 

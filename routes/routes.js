@@ -57,7 +57,7 @@ router.post('/edit_employee/:id', (req, res) => {
       let errorMessage = result.array();
       console.log(errorMessage);
       res.redirect('/edit_item/:id')
-    } else {      
+    } else {
       let editEmployee = req.body;
       employee.update(id, editEmployee, (err, result) => {
         if (err) {
@@ -106,6 +106,7 @@ router.get('/edit_item/:id', (req, res) => {
   })
 })
 
+
 router.post('/add_item', (req, res) => {
   let item = req.body.item;
   let quantity = req.body.quantity;
@@ -120,14 +121,14 @@ router.post('/add_item', (req, res) => {
       req.session.errorMessage = result.array().msg;
       let errorMessage = result.array();
       res.render('add_items', { errorMessage });
-    } else {
+    }else {
       req.session.errorMessage = '';
       console.log(result);
       inventory.insert(newItem, (err, result) => {
         if (err) {
           console.log(err);
           throw err;
-        } else {
+        }else {
           res.redirect('/currentinventory');
         }
       })
