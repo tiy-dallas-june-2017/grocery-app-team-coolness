@@ -101,15 +101,15 @@ router.post('/add_item', (req, res) => {
   let quantity = req.body.quantity;
   let price = req.body.price;
   let newItem = { item, quantity, price };
-  req.checkBody('item', 'Item entry may only include letters.').notEmpty().isAlpha();
-  req.checkBody('quantity', 'Quantity must be a number.').notEmpty().isInt();
-  req.checkBody('price', 'Price must be a number with no more than two decimal places.').notEmpty().isCurrency();
+  req.checkBody('item', 'Item must be filled in.').notEmpty();
+  req.checkBody('quantity', 'Quantity must be a number.').isInt();
+  req.checkBody('price', 'Price must be a number with no more than two decimal places and include a dollar sign.').isCurrency({ symbol: '$', require_symbol: true });
   req.getValidationResult()
   .then(function(result) {
     if (!result.isEmpty()) {
-      console.log('result=======================', result.array()[0].msg, '===================');
-      req.session.errorMessage = result.array()[0].msg;
-      res.render('add_items', { errorMessage: req.session.errorMessage });
+      req.session.errorMessage = result.array().msg;
+      let errorMessage = result.array();
+      res.render('add_items', { errorMessage });
     } else {
       req.session.errorMessage = '';
       console.log(result);
@@ -131,23 +131,21 @@ router.post('/edit_item/:id', (req, res) => {
   let quantity = req.body.quantity;
   let price = req.body.price;
   let editedItem = { item, quantity, price };
-  req.checkBody('item', 'Item entry may only include letters').notEmpty().isAlpha();
-  req.checkBody('quantity', 'Quantity must be a number.').notEmpty().isInt();
-  req.checkBody('price', 'Price must be a number.').notEmpty().isNumeric();
+  req.checkBody('item', 'Item must be filled in.').notEmpty();
+  req.checkBody('quantity', 'Quantity must be a number.').isInt();
+  req.checkBody('price', 'Price must be a number with no more than two decimal places and include a dollar sign.').isCurrency({ symbol: '$', require_symbol: true });
   req.getValidationResult()
   .then(function(result) {
     if (!result.isEmpty()) {
-      let errorMessage = result.array()[0].msg;
-      let data = { item: editedItem, errorMessage, id };
-      res.render('edit_item', data);
+      req.session.errorMessage = result.array().msg;
+      let errorMessage = result.array();
+      res.render('add_items', { errorMessage });
     } else {
       inventory.update(id, editedItem, (err, result) => {
         if (err) {
-
-          console.log('error=====================', err);
+          console.log(err);
           throw err;
         } else {
-          console.log('edited item ====================', result, 'end of result==================');
           res.redirect('/currentinventory');
           }
         });
@@ -163,12 +161,11 @@ router.post('/remove_item/:id', (req, res) => {
   let removedItem = { item, quantity, price };
   inventory.remove(id, (err, result) => {
     if (err) {
-      console.log('error====================', err);
+      console.log(err);
       // throw err;
       throw err;
       res.redirect('/');
     } else {
-      console.log('edited item ========================', result, 'end of result=====================');
       res.redirect('/currentinventory');
     }
   })
