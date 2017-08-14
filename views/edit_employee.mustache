@@ -18,14 +18,24 @@
 
   <form action="/edit_employee/{{ _id }}" method="POST">
     <input type="text" name="name" placeholder="Name" value="{{ name }}" />
-    <input type="time" name="time_in" placeholder="Start Time" value="{{ timeIn }}" />
-    <input type="time" name="time_out" placeholder="End Time" value={{ timeOut }} />
+    <input type="text" name="time_in" placeholder="Start Time" value="{{ timeIn }}" />
+    <input type="text" name="time_out" placeholder="End Time" value={{ timeOut }} />
     <input type="submit" value="Submit" />
     <a href="/schedule"><h3>Cancel</h3></a>
   </form>
   <form action="/remove_employee/{{ _id }}" method="POST" id="remove_form">
     <input id="remove" type="submit" value="delete"/>
   </form>
+
+  {{ #error }}
+  <div class="errors">
+    {{ #errorMessage }}
+
+    <h2>{{ msg }}</h2>
+
+    {{ /errorMessage }}
+  </div>
+  {{ /error }}
 
   </body>
 </html>
