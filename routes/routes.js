@@ -131,6 +131,32 @@ router.post('/edit_item/:id', (req, res) => {
     } else {
       inventory.update(id, editedItem, (err, result) => {
         if (err) {
+
+          console.log('error=====================', err);
+          throw err;
+        } else {
+          console.log('edited item ====================', result, 'end of result==================');
+          res.redirect('/currentinventory');
+          }
+        });
+      }
+  });
+});
+
+router.post('/remove_item/:id', (req, res) => {
+  let id = req.params.id;
+  let item = req.body.item;
+  let quantity = req.body.quantity;
+  let price = req.body.price;
+  let removedItem = { item, quantity, price };
+  inventory.remove(id, (err, result) => {
+    if (err) {
+      console.log('error====================', err);
+      // throw err;
+      res.redirect('/');
+    } else {
+      console.log('edited item ========================', result, 'end of result=====================');
+      res.redirect('/currentinventory');
           throw err;
         } else {
           res.redirect('/currentinventory');
