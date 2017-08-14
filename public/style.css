@@ -4,7 +4,7 @@ body {
 }
 
 .container {
-  width: 60%;
+  width: 80%;
   margin: 0 auto;
 }
 
@@ -77,6 +77,7 @@ nav ul li a:hover {
 
 h2 {
   text-align: center;
+  clear: both;
 }
 
 
@@ -86,16 +87,55 @@ h2 {
 }
 
 button{
-  background-color: black;
+  background-color: #9a9898;
   color: white;
   border: 1px solid white;
-  box-shadow: 2px 2px grey;
   font-size: 1em;
   font-weight: bold;
   font-style: oblique;
-
+  width: 8%;
+  height: 40px;
 }
+
+form {
+  width: 80%;
+  max-width: 300px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.form-group {
+  margin: 10px;
+  width: 100%;
+}
+
+.half {
+  width: 40%;
+  display: inline-block;
+}
+
 input{
+    width: 30%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid grey;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+form{
+  display: grid;
+}
+
+
+
+
+
+
+/*input{
   background-color: white;
   color: black;
   box-shadow: 2px 2px  grey;
@@ -103,6 +143,5 @@ input{
   text-align: center;
   font-weight: bold;
   font-family:sans-serif, serif;
-  width: 30px;
-
+  width: 100%;
 }
