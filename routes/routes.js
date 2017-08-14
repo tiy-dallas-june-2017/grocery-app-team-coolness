@@ -6,7 +6,6 @@ const expressValidator = require('express-validator');
 const session = require('express-session');
 
 router.get('/', (req, res) => {
-
   res.render('index');
 });
 
@@ -162,7 +161,6 @@ router.post('/remove_item/:id', (req, res) => {
   inventory.remove(id, (err, result) => {
     if (err) {
       console.log(err);
-      // throw err;
       throw err;
       res.redirect('/');
     } else {
@@ -199,6 +197,23 @@ router.post('/editEmployee', (req, res) => {
       res.redirect('/schedule');
     }
   })
+});
+
+router.post('/remove_employee/:id', (req, res) => {
+  let id = req.params.id;
+  let name = req.params.name;
+  let timeIn = req.params.time_In;
+  let timeOut = req.params.time_Out;
+  let removedEmployee = { name, timeIn, timeOut };
+  employee.remove(id, (err, result) => {
+    if (err) {
+      console.log(err);
+      throw err;
+      res.redirect('/schedule');
+    } else {
+      res.redirect('/schedule');
+    }
+  });
 });
 
 module.exports = router;

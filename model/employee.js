@@ -29,4 +29,11 @@ function update(itemId, editedEmployee, callback) {
   });
 };
 
-module.exports = { getAll, insert, findOne, update };
+function remove(itemId, callback) {
+  let db = mongo.db();
+  db.collection('employees').remove({ "_id": ObjectID(itemId) }, (err, result) => {
+    callback(err, result);
+  });
+};
+
+module.exports = { getAll, insert, findOne, update, remove };
