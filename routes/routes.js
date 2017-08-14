@@ -43,9 +43,21 @@ router.get('/editEmployee/:id', (req, res) => {
       throw err;
     } else {
       console.log(results);
-      res.render('addEmployee', results);
+      res.render('edit_employee', results);
     };
   });
+});
+
+router.post('/edit_employee/:id', (req, res) => {
+  let id = req.params.id;
+  let editEmployee = req.body;
+  employee.update(id, editEmployee, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect('/schedule');
+    }
+  })
 });
 
 router.get('/schedule', (req, res) => {

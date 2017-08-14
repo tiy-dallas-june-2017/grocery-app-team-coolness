@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add Employee</title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+
+    <nav>
+      <a href="/"><img id="logo" src="/assets/images/logo.png"/></a>
+      <ul>
+        <li><a href="/schedule">Employee Schedule</a></li>
+        <li><a href="/auditlog">Audit Log</a></li>
+        <li><a href="/currentinventory">Inventory</a></li>
+      </ul>
+    </nav>
+
+  <form action="/edit_employee/{{ _id }}" method="POST">
+    <input type="text" name="name" placeholder="Name" value="{{ name }}" />
+    <input type="text" name="time_in" placeholder="Start Time" value="{{ timeIn }}" />
+    <input type="text" name="time_out" placeholder="End Time" value={{ timeOut }} />
+    <input type="submit" value="Submit" />
+  </form>
+<a href="/schedule"><h3>Cancel</h3></a>
+  </body>
+</html>
