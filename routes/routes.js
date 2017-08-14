@@ -117,7 +117,13 @@ router.post('/add_item', (req, res) => {
   let item = req.body.item;
   let quantity = req.body.quantity;
   let price = req.body.price;
-  let newItem = { item, quantity, price };
+  if (quantity == 0) {
+    req.body.isMissing = true;
+  } else {
+    req.body.isMissing = false;
+  }
+  let isMissing = req.body.isMissing;
+  let newItem = { item, quantity, price, isMissing };
   req.checkBody('item', 'Item must be filled in.').notEmpty();
   req.checkBody('quantity', 'Quantity must be a number.').isInt();
   req.checkBody('price', 'Price must be a number with no more than two decimal places and include a dollar sign.').isCurrency({ symbol: '$', require_symbol: true });
@@ -127,14 +133,14 @@ router.post('/add_item', (req, res) => {
       req.session.errorMessage = result.array().msg;
       let errorMessage = result.array();
       res.render('add_items', { errorMessage });
-    } else {
+    }else {
       req.session.errorMessage = '';
       console.log(result);
       inventory.insert(newItem, (err, result) => {
         if (err) {
           console.log(err);
           throw err;
-        } else {
+        }else {
           res.redirect('/currentinventory');
         }
       })
