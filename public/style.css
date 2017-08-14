@@ -38,6 +38,7 @@ body {
 nav {
   background: black;
   padding-right: 80px;
+  margin-bottom: 50px;
 }
 
 #logo {
@@ -80,7 +81,6 @@ h2 {
   clear: both;
 }
 
-
 #titleContainer {
   margin: 180px auto 0;
   text-align: center;
@@ -100,9 +100,6 @@ form {
   width: 80%;
   max-width: 300px;
   margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
 }
 
 .form-group {
@@ -130,8 +127,4 @@ input{
     font-weight: bold;
     font-family:sans-serif, serif;
     width: 100%;
-}
-
-form{
-  display: grid;
 }
