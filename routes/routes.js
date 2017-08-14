@@ -103,7 +103,7 @@ router.post('/add_item', (req, res) => {
   let newItem = { item, quantity, price };
   req.checkBody('item', 'Item entry may only include letters.').notEmpty().isAlpha();
   req.checkBody('quantity', 'Quantity must be a number.').notEmpty().isInt();
-  req.checkBody('price', 'Price must be a number.').notEmpty().isNumeric();
+  req.checkBody('price', 'Price must be a number with no more than two decimal places.').notEmpty().isCurrency();
   req.getValidationResult()
   .then(function(result) {
     if (!result.isEmpty()) {
@@ -165,11 +165,11 @@ router.post('/remove_item/:id', (req, res) => {
     if (err) {
       console.log('error====================', err);
       // throw err;
+      throw err;
       res.redirect('/');
     } else {
       console.log('edited item ========================', result, 'end of result=====================');
       res.redirect('/currentinventory');
-        throw err;
     }
   })
 });
