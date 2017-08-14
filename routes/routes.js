@@ -157,11 +157,7 @@ router.post('/remove_item/:id', (req, res) => {
     } else {
       console.log('edited item ========================', result, 'end of result=====================');
       res.redirect('/currentinventory');
-          throw err;
-        } else {
-          res.redirect('/currentinventory');
-        }
-      });
+        throw err;
     }
   })
 });
