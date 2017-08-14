@@ -50,12 +50,23 @@ router.get('/editEmployee/:id', (req, res) => {
 
 router.post('/edit_employee/:id', (req, res) => {
   let id = req.params.id;
-  let editEmployee = req.body;
-  employee.update(id, editEmployee, (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.redirect('/schedule');
+  req.checkBody('name', 'Please enter a name.').notEmpty();
+  req.checkBody('time_in', 'Please enter a valid time for time in.').isTime();
+  req.checkBody('time_out', 'Please enter a valid time for time out.');
+  req.getValidationResult().then((result) => {
+    if (!result.isEmpty()) {
+      let errorMessage = result.array();
+      console.log(errorMessage);
+      res.redirect('/edit_item/:id')
+    } else {      
+      let editEmployee = req.body;
+      employee.update(id, editEmployee, (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.redirect('/schedule');
+        }
+      })
     }
   })
 });
