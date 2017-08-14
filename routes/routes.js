@@ -1,9 +1,10 @@
 const router = require('express').Router();
+// const cookieSession = require('cookie-session');
 const inventory = require('../model/inventory');
 const employee = require('../model/employee');
 const mongo = require('../mongo');
 const expressValidator = require('express-validator');
-const session = require('express-session');
+// const session = require('express-session');
 
 router.get('/', (req, res) => {
   res.render('index');
@@ -35,6 +36,8 @@ router.get('/currentinventory', (req, res) => {
 });
 
 router.get('/editEmployee/:id', (req, res) => {
+  console.log('SESSION DATA AFTER RELOAD ================================', req.session);
+  console.log(req.session.errorMessage);
   let id = req.params.id;
   employee.findOne({ _id: mongo.ObjectID(id) }, (err, results) => {
     if (err) {
@@ -42,7 +45,10 @@ router.get('/editEmployee/:id', (req, res) => {
       throw err;
     } else {
       console.log(results);
+      results.errorMessage = req.session.errorMessage;
+      results.error = req.session.error;
       res.render('edit_employee', results);
+      req.session = null;
     };
   });
 });
@@ -50,13 +56,14 @@ router.get('/editEmployee/:id', (req, res) => {
 router.post('/edit_employee/:id', (req, res) => {
   let id = req.params.id;
   req.checkBody('name', 'Please enter a name.').notEmpty();
-  req.checkBody('time_in', 'Please enter a valid time for time in.').isTime();
-  req.checkBody('time_out', 'Please enter a valid time for time out.');
+  req.checkBody('time_in', 'Please enter a valid time for time in.').isInt({min: 0, max: 2399}).isLength({min: 4, max: 4});
+  req.checkBody('time_out', 'Please enter a valid time for time out.').isInt({min: 0, max: 2399}).isLength({min: 4, max: 4});
   req.getValidationResult().then((result) => {
     if (!result.isEmpty()) {
-      let errorMessage = result.array();
-      console.log(errorMessage);
-      res.redirect('/edit_item/:id')
+      req.session.errorMessage = result.array();
+      req.session.error = true;
+      console.log('SESSION DATA BEFORE RELOAD==================', req.session);
+      res.redirect('/editEmployee/' + id);
     } else {
       let editEmployee = req.body;
       employee.update(id, editEmployee, (err, result) => {
@@ -105,7 +112,6 @@ router.get('/edit_item/:id', (req, res) => {
     }
   })
 })
-
 
 router.post('/add_item', (req, res) => {
   let item = req.body.item;
@@ -196,20 +202,20 @@ router.post('/addEmployee', (req, res) => {
   })
 });
 
-router.post('/editEmployee', (req, res) => {
-  let name = req.body.name;
-  let timeIn = req.body.time_in;
-  let timeOut = req.body.time_out;
-  let editedEmployee = { name, timeIn, timeOut };
-  employee.insert(newEmployee, (err, result) => {
-    if (err) {
-      console.log(err, results);
-      throw err;
-    } else {
-      res.redirect('/schedule');
-    }
-  })
-});
+// router.post('/editEmployee', (req, res) => {
+//   let name = req.body.name;
+//   let timeIn = req.body.time_in;
+//   let timeOut = req.body.time_out;
+//   let editedEmployee = { name, timeIn, timeOut };
+//   employee.insert(newEmployee, (err, result) => {
+//     if (err) {
+//       console.log(err, results);
+//       throw err;
+//     } else {
+//       res.redirect('/schedule');
+//     }
+//   })
+// });
 
 router.post('/remove_employee/:id', (req, res) => {
   let id = req.params.id;
