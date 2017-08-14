@@ -17,26 +17,21 @@
     </nav>
 
     <div class="add_items">
-      <h2>Add Item</h2>
+      <h2>Edit Item</h2>
 
       <div class="items_form">
-        <form action="/add_item" method="POST">
+        <form action="/edit_item/{{ item._id }}" method="POST">
           <div class="form-group">
-            <label>Item: </label>
-            <input type="text" name="item" value=""/>
-          </div>
-          <div class="form-group half">
-            <label>Quantity: </label>
-            <input type="number" name="quantity" value="" />
-          </div>
-          <div class="form-group half">
-            <label>Price: </label>
-            <input type="number" name="price" value="" />
+            <input type="text" name="item" value="{{ item.item }}"/>
           </div>
           <div class="form-group">
-            <a href=""><h3>cancel</h3></a>
-            <button id="submit" type="submit">Save</button>
+            <input type="number" name="quantity" value="{{ item.quantity }}" />
           </div>
+          <div class="form-group">
+            <input type="number" name="price" value="{{ item.price }}" />
+          </div>
+          <a href=""><h3>cancel</h3></a>
+          <button id="submit" type="submit">Save</button>
         </form>
 
 
