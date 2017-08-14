@@ -22,8 +22,8 @@ function findOne(itemId, callback) {
   });
 };
 
-function update(itemId, editedItem, callback) {
-  let db = mongod.db();
+function update(itemId, editedEmployee, callback) {
+  let db = mongo.db();
   db.collection('employees').update({ "_id": ObjectID(itemId) }, { $set: editedEmployee }, (err, result) => {
     callback(err, result);
   });
