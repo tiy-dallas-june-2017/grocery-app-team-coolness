@@ -5,6 +5,7 @@ const express = require('express'),
       expressValidator = require('express-validator'),
       mongo = require('./mongo'),
       mustacheExpress = require('mustache-express');
+      dotenv = require('dotenv').config();
       // session = require('express-session');
 
 const router = require('./routes/routes');
